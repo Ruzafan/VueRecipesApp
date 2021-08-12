@@ -13,7 +13,23 @@
         placeholder="Image url"
       />
     </div>
-
+    <div class="form-control">
+      <label>Ingedient:</label>
+      <input 
+        type="text"
+        v-model="name"
+        name="ingredient"
+        placeholder="Ingredient name" 
+        />
+        <label>Quantity:</label>
+        <input 
+        type="text"
+        v-model="quantity"
+        name="quantity"
+        placeholder="Quantity" 
+        />
+        <button @click="AddIngredient">Add Ingredient</button>
+    </div>
     <input type="submit" value="Save Recipe" class="btn btn-block" />
   </form>
 </template>
@@ -25,6 +41,9 @@ export default {
     return {
       title: '',
       image: '',
+      ingredients: [],
+      name: '',
+      quantity: ''
     }
   },
   methods: {
@@ -37,11 +56,24 @@ export default {
       const newRecipe = {
         title: this.title,
         image: this.image,
+        ingredients: this.ingredients
       }
       this.$emit('add-recipe', newRecipe)
       this.title = ''
       this.image = ''
+      this.name = ''
+      this.quantity = ''
+      this.ingredients = []
     },
+    AddIngredient(e){
+      e.preventDefault()
+      this.ingredients.push({
+        name: this.name,
+        quantity: this.quantity
+      })
+      this.name = ''
+      this.quantity = ''
+    }
   },
 }
 </script>

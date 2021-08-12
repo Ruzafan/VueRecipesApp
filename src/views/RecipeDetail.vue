@@ -2,6 +2,14 @@
     <div class="recipe_detail">
         <h3>{{recipe.title}}</h3>
         <img :src="recipe.image"/>
+        <div class="ingredients" v-show="hasIngredients">
+            <h4>Ingredients</h4>
+            <ul :key="ingredient.name" v-for="ingredient in recipe.ingredients">
+                <li>
+                    <span class="ingredient-name">{{ingredient.name}}</span><span>{{ingredient.quantity}}</span>
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -10,6 +18,7 @@ export default {
     data() {
         return {
          recipe : Object,
+         hasIngredients: Boolean
         }
     },
     methods: {
@@ -22,13 +31,14 @@ export default {
     async created(){
         const id = this.$route.params.id
         const recipe = await this.fetchRecipe(id)
-        console.log(recipe)
         this.recipe = recipe
+        console.log(recipe.ingredients !== undefined)
+        this.hasIngredients = recipe.ingredients !== undefined
     }
 }
 </script>
 <style scoped>
-*{
+* {
     display: block;
 }
 .recipe_detail{
@@ -39,6 +49,13 @@ img {
     margin: 0 auto;
     max-width: 500px;
 }
+.ingredients { text-align: left; }
+.ingredients ul li { display: list-item; }
+.ingredients ul li span { display: inline-block; }
+
+.ingredient-name { margin-right: 10px; }
+.ingredient-name::first-letter { text-transform: uppercase; }
+
 
 @media only screen and (max-width: 860px) {
   img {
