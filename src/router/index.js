@@ -3,6 +3,7 @@ import {createRouter, createWebHistory} from 'vue-router'
 import Home from '../views/Home'
 import Options from '../views/Options'
 import NewRecipe from '../views/NewRecipe'
+import RecipeDetail from '../views/RecipeDetail'
 
 const routes = [
     {
@@ -19,6 +20,11 @@ const routes = [
         path: '/add_recipe',
         name: 'NewRecipe',
         component: NewRecipe
+    },
+    {
+        path: '/recipe/:id',
+        name: 'RecipeDetail',
+        component: RecipeDetail
     }
 ]
 

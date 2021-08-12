@@ -3,6 +3,7 @@
         <div :key="recipe.id" v-for="recipe in recipes">
             <Recipe :recipe="recipe"/>
         </div>
+        <div class="clear"></div>
     </div>
 </template>
 
@@ -19,3 +20,9 @@ export default{
     }
 }
 </script>
+
+<style scoped>
+.clear {
+    clear: both;
+}
+</style>
